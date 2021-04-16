@@ -16,7 +16,7 @@
 package com.ckmates.java.practice.example1;
 
 import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.CompletableFuture;
@@ -24,19 +24,19 @@ import java.util.concurrent.ExecutionException;
 
 import org.apache.commons.io.FileUtils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import net.sf.rubycollect4j.Ruby;
-import net.sf.rubycollect4j.RubyArray;
 import net.sf.rubycollect4j.RubyIO.Mode;
 
 public class UsageAccountIdLineCounter {
 
   public static void main(String... strings)
-      throws InterruptedException, ExecutionException, IOException {
+      throws InterruptedException, ExecutionException, JsonProcessingException {
     var startTime = System.currentTimeMillis();
 
-    var tasks = new RubyArray<CompletableFuture<Map<String, Integer>>>();
+    var tasks = new ArrayList<CompletableFuture<Map<String, Integer>>>();
 
     File curFolder = new File("../amazon-billing/CUR");
     for (var zip : FileUtils.listFiles(curFolder, new String[] { "zip" },
@@ -46,7 +46,8 @@ public class UsageAccountIdLineCounter {
     }
 
     // Wait for async tasks
-    while (!tasks.allʔ(task -> task.isDone())) {}
+    CompletableFuture.allOf(tasks.stream().toArray(CompletableFuture[]::new))
+        .join();
 
     var result = new TreeMap<String, Integer>();
     for (var task : tasks) {
