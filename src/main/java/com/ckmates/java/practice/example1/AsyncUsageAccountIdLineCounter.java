@@ -15,6 +15,7 @@
  */
 package com.ckmates.java.practice.example1;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,15 +30,15 @@ import net.sf.rubycollect4j.Ruby;
 public final class AsyncUsageAccountIdLineCounter {
 
   private final Map<String, Integer> counter = new HashMap<>();
-  private final CSVReader csvReader;
+  private final File zip;
 
-  public AsyncUsageAccountIdLineCounter(CSVReader csvReader) {
-    this.csvReader = Objects.requireNonNull(csvReader);
+  public AsyncUsageAccountIdLineCounter(File zip) {
+    this.zip = Objects.requireNonNull(zip);
   }
 
   public CompletableFuture<Map<String, Integer>> countAsync() {
     return CompletableFuture.supplyAsync(() -> {
-      try (csvReader) {
+      try (CSVReader csvReader = ZippedCSVReader.zipToCSVReader(zip)) {
         if (csvReader.peek() != null) {
           var header = csvReader.readNext();
           var uaIdIdx =

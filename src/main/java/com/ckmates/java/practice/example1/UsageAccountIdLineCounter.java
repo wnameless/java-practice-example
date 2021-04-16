@@ -41,8 +41,7 @@ public class UsageAccountIdLineCounter {
     File curFolder = new File("../amazon-billing/CUR");
     for (var zip : FileUtils.listFiles(curFolder, new String[] { "zip" },
         true)) {
-      var csvReader = ZippedCSVReader.zipToCSVReader(zip);
-      var task = new AsyncUsageAccountIdLineCounter(csvReader).countAsync();
+      var task = new AsyncUsageAccountIdLineCounter(zip).countAsync();
       tasks.add(task);
     }
 
