@@ -28,6 +28,7 @@ import com.opencsv.CSVReader;
 
 public final class ZippedCSVReader {
 
+  // TODO
   private ZippedCSVReader() {}
 
   public static CSVReader zipToCSVReader(File zip) throws IOException {

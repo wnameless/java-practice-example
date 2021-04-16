@@ -33,11 +33,13 @@ public final class AsyncUsageAccountIdLineCounter {
   private final File zip;
 
   public AsyncUsageAccountIdLineCounter(File zip) {
+    // TODO
     this.zip = Objects.requireNonNull(zip);
   }
 
   public CompletableFuture<Map<String, Integer>> countAsync() {
     return CompletableFuture.supplyAsync(() -> {
+      // TODO
       try (CSVReader csvReader = ZippedCSVReader.zipToCSVReader(zip)) {
         if (csvReader.peek() != null) {
           var header = csvReader.readNext();
@@ -55,6 +57,7 @@ public final class AsyncUsageAccountIdLineCounter {
           }
         }
       } catch (CsvValidationException | IOException e) {
+        // TODO
         throw new RuntimeException(e);
       }
 

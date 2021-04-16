@@ -39,19 +39,23 @@ public class UsageAccountIdLineCounter {
     var tasks = new ArrayList<CompletableFuture<Map<String, Integer>>>();
 
     File curFolder = new File("../amazon-billing/CUR");
-    for (var zip : FileUtils.listFiles(curFolder, new String[] { "zip" },
-        true)) {
+    for (var zip :
+    // TODO
+    FileUtils.listFiles(curFolder, new String[] { "zip" }, true)) {
       var task = new AsyncUsageAccountIdLineCounter(zip).countAsync();
       tasks.add(task);
     }
 
     // Wait for async tasks
+    // TODO
     CompletableFuture.allOf(tasks.stream().toArray(CompletableFuture[]::new))
         .join();
 
+    // TODO
     var result = new TreeMap<String, Integer>();
     for (var task : tasks) {
       var counts = task.get();
+      // TODO
       counts.forEach(
           (key, value) -> result.merge(key, value, (v1, v2) -> v1 + v2));
     }
