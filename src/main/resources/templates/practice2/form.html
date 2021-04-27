@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="partial">
+    <form th:action="@{${memo.id == null ? '/memos' : '/memos/' + memo.id}}" th:object="${memo}" method="POST">
+        <div class="form-group">
+            <label>Title</label>
+            <input class="form-control" type="text" th:field="*{title}" />
+        </div>
+        <div class="form-group">
+            <label>Text</label>
+            <textarea class="form-control" th:field="*{text}"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Labels</label>
+            <input class="form-control" type="text" th:field="*{labels}" />
+            <small class="form-text text-muted">Labels can be saperated by comma(,).</small>
+        </div>
+        <div class="form-group form-check">
+            <input class="form-check-input" type="checkbox" th:field="*{archived}" />
+            <label class="form-check-label">Archived</label>
+        </div>
+        <button th:unless="${memo.id}" type="submit" class="btn btn-primary" th:text="Create"></button>
+        <button th:if="${memo.id}" type="submit" class="btn btn-success" name="update" th:text="Update"></button>
+        <button th:if="${memo.id}" type="submit" class="btn btn-danger" name="delete" th:text="Delete"></button>
+    </form>
+</div>
+
+</html>

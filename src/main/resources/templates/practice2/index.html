@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/main.html}">
+
+<section layout:fragment="content">
+
+    <div class="row">
+
+        <div class="col-sm">
+            <div th:replace="practice2/form :: partial"></div>
+        </div>
+
+        <div class="col-sm">
+            <div th:replace="practice2/list :: partial"></div>
+        </div>
+
+    </div>
+
+    <script th:replace="fragments/bs :: notify"></script>
+</section>
+
+</html>
