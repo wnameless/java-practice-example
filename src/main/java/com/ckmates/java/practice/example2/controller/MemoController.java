@@ -61,7 +61,7 @@ public class MemoController {
     model.addAttribute("memo", new SimpleMemo());
     model.addAttribute("page",
         simpleMemoRepo.findAllByArchived(archived, pageable));
-    return "practice2/index";
+    return "memos/index";
   }
 
   @PostMapping
@@ -80,7 +80,7 @@ public class MemoController {
 
     model.addAttribute("page",
         simpleMemoRepo.findAllByArchived(memo.isArchived(), pageable));
-    return "practice2/index";
+    return "memos/index";
   }
 
   @GetMapping("/{id}")
@@ -90,7 +90,7 @@ public class MemoController {
     model.addAttribute("memo", memo);
     model.addAttribute("page",
         simpleMemoRepo.findAllByArchived(memo.isArchived(), pageable));
-    return "practice2/index";
+    return "memos/index";
   }
 
   @PostMapping(path = "/{id}", params = "update")
@@ -111,7 +111,7 @@ public class MemoController {
 
     model.addAttribute("page",
         simpleMemoRepo.findAllByArchived(memo.isArchived(), pageable));
-    return "practice2/index";
+    return "memos/index";
   }
 
   @PostMapping(path = "/{id}", params = "delete")
@@ -122,7 +122,7 @@ public class MemoController {
     model.addAttribute("memo", new SimpleMemo());
     model.addAttribute("page",
         simpleMemoRepo.findAllByArchived(memo.isArchived(), pageable));
-    return "practice2/index";
+    return "memos/index";
   }
 
 }

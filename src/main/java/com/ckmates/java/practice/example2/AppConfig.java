@@ -17,8 +17,10 @@ package com.ckmates.java.practice.example2;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.thymeleaf.dialect.springdata.SpringDataDialect;
 
+@PropertySource("classpath:/practice2/application.properties")
 @Configuration
 public class AppConfig {
 
