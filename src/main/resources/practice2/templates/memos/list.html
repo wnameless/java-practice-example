@@ -13,7 +13,7 @@
         <tbody>
             <tr th:each="row : ${page}">
                 <td>
-                    <a th:text="${row.title}" th:href="@{/memos/{id}(id=${row.id})}"></a>
+                    <a th:text="${row.title}" th:href="@{/memos/{id}(id = ${row.id})}"></a>
                 </td>
                 <td th:text="${row.labels}"></td>
                 <td th:text="${row.timestamp}"></td>
