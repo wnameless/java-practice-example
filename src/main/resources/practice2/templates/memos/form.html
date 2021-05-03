@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <div th:fragment="partial">
-    <form th:action="@{${memo.id == null ? '/memos' : '/memos/' + memo.id}}" th:object="${memo}" method="POST">
+    <form th:action="@{/memos/{id}(id = ${memo.id})}" th:object="${memo}" method="POST">
         <div class="form-group">
             <label>Title</label>
             <input class="form-control" type="text" th:field="*{title}" />
