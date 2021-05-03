@@ -24,8 +24,10 @@ import com.ckmates.java.practice.example2.model.SimpleMemo;
 
 @Repository
 public interface SimpleMemoRepository
+    // TODO
     extends PagingAndSortingRepository<SimpleMemo, Long> {
 
+  // TODO
   Page<SimpleMemo> findAllByArchived(boolean archived, Pageable pageable);
 
 }

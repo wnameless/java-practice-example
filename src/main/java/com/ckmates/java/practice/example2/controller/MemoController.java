@@ -45,12 +45,14 @@ public class MemoController {
   Pageable pageable;
   boolean archived;
 
+  // TODO
   @ModelAttribute("pageable")
   Pageable pageable(@SortDefault(sort = "timestamp",
       direction = Direction.DESC) Pageable pageable) {
     return this.pageable = pageable;
   }
 
+  // TODO
   @ModelAttribute("archived")
   boolean showArchived(@RequestParam(required = false) Boolean archived) {
     return this.archived = archived != null ? archived : false;
@@ -65,9 +67,13 @@ public class MemoController {
   }
 
   @PostMapping
-  String create(Model model, @Valid @ModelAttribute MemoForm memoForm,
+  String create(Model model,
+      // TODO
+      @Valid @ModelAttribute MemoForm memoForm,
+      // TODO
       BindingResult bindingResult) {
     SimpleMemo memo;
+    // TODO
     if (bindingResult.hasErrors()) {
       model.addAttribute("message",
           bindingResult.getAllErrors().get(0).getDefaultMessage());
@@ -93,14 +99,21 @@ public class MemoController {
     return "memos/index";
   }
 
-  @PostMapping(path = "/{id}", params = "update")
+  @PostMapping(path = "/{id}",
+      // TODO
+      params = "update")
   String update(Model model, @PathVariable Long id,
-      @Valid @ModelAttribute MemoForm memoForm, BindingResult bindingResult) {
+      // TODO
+      @Valid @ModelAttribute MemoForm memoForm,
+      // TODO
+      BindingResult bindingResult) {
     SimpleMemo memo = simpleMemoRepo.findById(id).get();
     memo = new SimpleMemo(memoForm);
+    // TODO
     memo.setId(id);
 
     if (bindingResult.hasErrors()) {
+      // TODO
       model.addAttribute("message",
           bindingResult.getAllErrors().get(0).getDefaultMessage());
       model.addAttribute("memo", memo);
@@ -114,7 +127,9 @@ public class MemoController {
     return "memos/index";
   }
 
-  @PostMapping(path = "/{id}", params = "delete")
+  @PostMapping(path = "/{id}",
+      // TODO
+      params = "delete")
   String delete(Model model, @PathVariable Long id) {
     SimpleMemo memo = simpleMemoRepo.findById(id).get();
     simpleMemoRepo.delete(memo);

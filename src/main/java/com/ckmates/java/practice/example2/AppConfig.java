@@ -20,12 +20,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.thymeleaf.dialect.springdata.SpringDataDialect;
 
+//TODO
 @PropertySource("classpath:/practice2/application.properties")
 @Configuration
 public class AppConfig {
 
   @Bean
   public SpringDataDialect springDataDialect() {
+    // TODO
     return new SpringDataDialect();
   }
 

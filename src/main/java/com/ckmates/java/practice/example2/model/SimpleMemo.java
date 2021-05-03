@@ -45,6 +45,7 @@ public class SimpleMemo implements Memo {
 
   LocalDateTime timestamp = LocalDateTime.now();
 
+  // TODO
   @ElementCollection
   Set<String> labels = new TreeSet<>();
 
@@ -52,6 +53,7 @@ public class SimpleMemo implements Memo {
 
   public SimpleMemo() {}
 
+  // TODO
   public SimpleMemo(MemoForm memoForm) {
     title = memoForm.getTitle();
     text = memoForm.getText();

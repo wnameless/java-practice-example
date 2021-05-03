@@ -25,6 +25,7 @@ public class IndexController {
 
   @GetMapping
   String index() {
+    // TODO
     return "redirect:/memos";
   }
 

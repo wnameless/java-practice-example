@@ -22,6 +22,7 @@ import lombok.Data;
 @Data
 public class MemoForm {
 
+  // TODO
   @NotBlank(message = "Title can NOT be empty")
   String title;
 
