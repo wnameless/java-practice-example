@@ -15,19 +15,34 @@
  */
 package com.ckmates.java.practice.example2.repository;
 
+import java.util.Collection;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import com.ckmates.java.practice.example2.model.QSimpleMemo;
 import com.ckmates.java.practice.example2.model.SimpleMemo;
 
 @Repository
 public interface SimpleMemoRepository
     // TODO
-    extends PagingAndSortingRepository<SimpleMemo, Long> {
+    extends PagingAndSortingRepository<SimpleMemo, Long>,
+    QuerydslPredicateExecutor<SimpleMemo> {
 
   // TODO
   Page<SimpleMemo> findAllByArchived(boolean archived, Pageable pageable);
+
+  // TODO
+  default Page<SimpleMemo> findAllByArchivedAndLabelsIn(boolean archived,
+      Collection<String> labels, Pageable pageable) {
+    var qSimpleMemo = QSimpleMemo.simpleMemo;
+    var archivedEq = qSimpleMemo.archived.eq(archived);
+    var labelsAny = qSimpleMemo.labels.any().in(labels);
+
+    return findAll(archivedEq.and(labelsAny), pageable);
+  }
 
 }

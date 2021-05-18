@@ -41,9 +41,19 @@ public class MemoController {
 
   @Autowired
   SimpleMemoRepository simpleMemoRepo;
+  @Autowired
+  MemoService memoService;
 
   Pageable pageable;
   boolean archived;
+  String labelFilter;
+
+  // TODO
+  @ModelAttribute("labelFilter")
+  String labelFilter(
+      @RequestParam(required = false, defaultValue = "") String labelFilter) {
+    return this.labelFilter = labelFilter;
+  }
 
   // TODO
   @ModelAttribute("pageable")
@@ -61,8 +71,8 @@ public class MemoController {
   @GetMapping
   String index(Model model) {
     model.addAttribute("memo", new SimpleMemo());
-    model.addAttribute("page",
-        simpleMemoRepo.findAllByArchived(archived, pageable));
+    model.addAttribute("page", memoService
+        .findAllByByArchivedAndLabelFilter(archived, labelFilter, pageable));
     return "memos/index";
   }
 
@@ -84,8 +94,8 @@ public class MemoController {
       model.addAttribute("memo", new SimpleMemo());
     }
 
-    model.addAttribute("page",
-        simpleMemoRepo.findAllByArchived(memo.isArchived(), pageable));
+    model.addAttribute("page", memoService
+        .findAllByByArchivedAndLabelFilter(archived, labelFilter, pageable));
     return "memos/index";
   }
 
@@ -94,8 +104,8 @@ public class MemoController {
     SimpleMemo memo = simpleMemoRepo.findById(id).get();
 
     model.addAttribute("memo", memo);
-    model.addAttribute("page",
-        simpleMemoRepo.findAllByArchived(memo.isArchived(), pageable));
+    model.addAttribute("page", memoService
+        .findAllByByArchivedAndLabelFilter(archived, labelFilter, pageable));
     return "memos/index";
   }
 
@@ -122,8 +132,8 @@ public class MemoController {
       model.addAttribute("memo", new SimpleMemo());
     }
 
-    model.addAttribute("page",
-        simpleMemoRepo.findAllByArchived(memo.isArchived(), pageable));
+    model.addAttribute("page", memoService
+        .findAllByByArchivedAndLabelFilter(archived, labelFilter, pageable));
     return "memos/index";
   }
 
@@ -135,8 +145,8 @@ public class MemoController {
     simpleMemoRepo.delete(memo);
 
     model.addAttribute("memo", new SimpleMemo());
-    model.addAttribute("page",
-        simpleMemoRepo.findAllByArchived(memo.isArchived(), pageable));
+    model.addAttribute("page", memoService
+        .findAllByByArchivedAndLabelFilter(archived, labelFilter, pageable));
     return "memos/index";
   }
 
